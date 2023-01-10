@@ -10,7 +10,7 @@ using ParametersLayer;
 
 namespace ServiceLayer
 {
-    public class InsertSqlService : ICodeSqlService
+    public class InsertSqlService : IInsertSqlService
     {
         private readonly IDBProvider _Provider;
         public InsertSqlService()

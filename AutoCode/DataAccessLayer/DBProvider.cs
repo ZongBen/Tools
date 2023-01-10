@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Interface;
 using ParametersLayer;
-using SQLHelper;
+using SqlUtility;
 
 namespace DataAccessLayer
 {

@@ -49,6 +49,7 @@ namespace AutoCode
             this.ConnectStr = ConnectStr;
             Class_Btn.Enabled = true;
             InsertSql_Btn.Enabled = true;
+            Model_Btn.Enabled = true;
             MessageBox.Show("連線成功");
         }
 
@@ -118,11 +119,20 @@ namespace AutoCode
 
         private void InsertSql_Btn_Click(object sender, EventArgs e)
         {
-            AutoCodeSql ClassForm = new AutoCodeSql(TableNameList, ConnectStr, new InsertSqlService())
+            AutoCodeSql ClassForm = new AutoCodeSql(TableNameList, ConnectStr)
             {
                 StartPosition = FormStartPosition.CenterParent
             };
             ClassForm.ShowDialog(this);
+        }
+
+        private void Model_Btn_Click(object sender, EventArgs e)
+        {
+            AutoCodeModel ModelForm = new AutoCodeModel(TableNameList, ConnectStr)
+            {
+                StartPosition = FormStartPosition.CenterParent
+            };
+            ModelForm.ShowDialog(this);
         }
     }
 }

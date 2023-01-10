@@ -16,12 +16,12 @@ namespace AutoCode
     {
         private List<string> TableNameList { get; }
         private string ConnectStr { get; }
-        private readonly ICodeSqlService _Service;
+        private readonly IInsertSqlService _Service;
         private readonly ISbSqlService _SbSqlService;
 
-        public AutoCodeSql(List<string> TableNameList, string ConnectStr, ICodeSqlService Service)
+        public AutoCodeSql(List<string> TableNameList, string ConnectStr)
         {
-            _Service = Service;
+            _Service = new InsertSqlService();
             _SbSqlService = new SbSqlService();
             this.TableNameList = TableNameList;
             this.ConnectStr = ConnectStr;

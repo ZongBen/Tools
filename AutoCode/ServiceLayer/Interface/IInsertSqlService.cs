@@ -7,7 +7,7 @@ using ParametersLayer;
 
 namespace ServiceLayer.Interface
 {
-    public interface ICodeSqlService
+    public interface IInsertSqlService
     {
         List<string> GetCols(string TableName, string ConnectStr);
         CodeSqlResultModel AutoCode(string TableName, List<string> ColList);

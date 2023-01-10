@@ -48,6 +48,7 @@ namespace AutoCode
             this.DelSettingBtn = new System.Windows.Forms.Button();
             this.Class_Btn = new System.Windows.Forms.Button();
             this.InsertSql_Btn = new System.Windows.Forms.Button();
+            this.Model_Btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Tb_ServerName
@@ -60,7 +61,7 @@ namespace AutoCode
             // ConnectBtn
             // 
             this.ConnectBtn.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.ConnectBtn.Location = new System.Drawing.Point(85, 254);
+            this.ConnectBtn.Location = new System.Drawing.Point(78, 263);
             this.ConnectBtn.Name = "ConnectBtn";
             this.ConnectBtn.Size = new System.Drawing.Size(319, 32);
             this.ConnectBtn.TabIndex = 2;
@@ -208,7 +209,7 @@ namespace AutoCode
             this.Class_Btn.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.Class_Btn.Location = new System.Drawing.Point(12, 319);
             this.Class_Btn.Name = "Class_Btn";
-            this.Class_Btn.Size = new System.Drawing.Size(204, 50);
+            this.Class_Btn.Size = new System.Drawing.Size(132, 50);
             this.Class_Btn.TabIndex = 22;
             this.Class_Btn.Text = "產生類別";
             this.Class_Btn.UseVisualStyleBackColor = true;
@@ -218,19 +219,32 @@ namespace AutoCode
             // 
             this.InsertSql_Btn.Enabled = false;
             this.InsertSql_Btn.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.InsertSql_Btn.Location = new System.Drawing.Point(268, 319);
+            this.InsertSql_Btn.Location = new System.Drawing.Point(340, 319);
             this.InsertSql_Btn.Name = "InsertSql_Btn";
-            this.InsertSql_Btn.Size = new System.Drawing.Size(194, 50);
+            this.InsertSql_Btn.Size = new System.Drawing.Size(132, 50);
             this.InsertSql_Btn.TabIndex = 23;
             this.InsertSql_Btn.Text = "產生InsertSql";
             this.InsertSql_Btn.UseVisualStyleBackColor = true;
             this.InsertSql_Btn.Click += new System.EventHandler(this.InsertSql_Btn_Click);
+            // 
+            // Model_Btn
+            // 
+            this.Model_Btn.Enabled = false;
+            this.Model_Btn.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Model_Btn.Location = new System.Drawing.Point(171, 319);
+            this.Model_Btn.Name = "Model_Btn";
+            this.Model_Btn.Size = new System.Drawing.Size(132, 50);
+            this.Model_Btn.TabIndex = 24;
+            this.Model_Btn.Text = "產生Model";
+            this.Model_Btn.UseVisualStyleBackColor = true;
+            this.Model_Btn.Click += new System.EventHandler(this.Model_Btn_Click);
             // 
             // AutoCodeDB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(487, 387);
+            this.Controls.Add(this.Model_Btn);
             this.Controls.Add(this.InsertSql_Btn);
             this.Controls.Add(this.Class_Btn);
             this.Controls.Add(this.DelSettingBtn);
@@ -278,6 +292,7 @@ namespace AutoCode
         private System.Windows.Forms.Button DelSettingBtn;
         private System.Windows.Forms.Button Class_Btn;
         private System.Windows.Forms.Button InsertSql_Btn;
+        private System.Windows.Forms.Button Model_Btn;
     }
 }
 

@@ -4,33 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ServiceLayer.Interface;
-using System.IO;
-using ParametersLayer;
-using DataAccessLayer;
 using DataAccessLayer.Interface;
+using DataAccessLayer;
+using ParametersLayer;
+using System.IO;
 
 namespace ServiceLayer
 {
-    public class ClassService : IClassService
+    public class ModelService : IModelService
     {
         private readonly IDBProvider _Provider;
         private readonly ICommonService _commonService;
-        public ClassService()
+        public ModelService()
         {
             _Provider = new DBProvider();
             _commonService = new CommonService();
         }
+        public List<TableColumns> GetCols(string TableName, string ConnectStr)
+        {
+            IList<TableColumns> tableColumns = _Provider.GetTableColumns(TableName, ConnectStr);
+            return tableColumns.ToList();
+        }
 
-        public void AutoCode(string TableName, string FolderPath, string ConnectStr)
+        public void AutoCode(List<TableColumns> model,string ModelName, string FolderPath)
         {
             if (!Directory.Exists(FolderPath))
             {
                 Directory.CreateDirectory(FolderPath);
             }
-            FolderPath += $"\\{TableName}.cs";
+            FolderPath += $"\\{ModelName}.cs";
             StreamWriter sw = File.CreateText(FolderPath);
-            List<TableColumns> tableColumns = _Provider.GetTableColumns(TableName, ConnectStr).ToList();
-            sw.Write(_commonService.CodeClass(TableName, tableColumns));
+            sw.Write(_commonService.CodeClass(ModelName, model));
             sw.Flush();
             sw.Close();
         }

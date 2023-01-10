@@ -73,6 +73,12 @@
     <Compile Include="AutoCodeDB.designer.cs">
       <DependentUpon>AutoCodeDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="AutoCodeModel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AutoCodeModel.Designer.cs">
+      <DependentUpon>AutoCodeModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="AutoCodeSql.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +128,9 @@
     <Compile Include="Settings.cs" />
     <EmbeddedResource Include="AutoCodeDB.resx">
       <DependentUpon>AutoCodeDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AutoCodeModel.resx">
+      <DependentUpon>AutoCodeModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AutoCodeSql.resx">
       <DependentUpon>AutoCodeSql.cs</DependentUpon>

@@ -54,8 +54,10 @@
     <Compile Include="ClassService.cs" />
     <Compile Include="InsertSqlService.cs" />
     <Compile Include="Interface\IClassService.cs" />
-    <Compile Include="Interface\ICodeSqlService.cs" />
+    <Compile Include="Interface\IInsertSqlService.cs" />
+    <Compile Include="Interface\IModelService.cs" />
     <Compile Include="Interface\ISchemaService.cs" />
+    <Compile Include="ModelService.cs" />
     <Compile Include="SbSqlService.cs" />
     <Compile Include="CommonService.cs" />
     <Compile Include="Interface\IDBService.cs" />

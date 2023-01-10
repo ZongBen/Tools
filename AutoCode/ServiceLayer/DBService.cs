@@ -63,7 +63,7 @@ namespace ServiceLayer
                     result.Add((string)row[2]);
                 }
             }
-            return result;
+            return result.OrderBy(x => x).ToList();
         }
 
         public void SaveSettings(DBSetting item)
