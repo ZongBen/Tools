@@ -47,7 +47,7 @@ namespace SqlUtility
             return result;
         }
 
-        public async Task<IList<T>> AsyncExecuteList<T>(string Command, SqlHelperParameters objParameters) where T : class, new()
+        public async Task<IList<T>> ExecuteListAsync<T>(string Command, SqlHelperParameters objParameters) where T : class, new()
         {
             DataTable dt = new DataTable();
             using (SqlDataAdapter da = new SqlDataAdapter(Command, Connection))
@@ -90,7 +90,7 @@ namespace SqlUtility
             }
         }
 
-        public async Task<int> AsyncExecuteNonQuery(string Command, SqlHelperParameters objParameters)
+        public async Task<int> ExecuteNonQueryAsync(string Command, SqlHelperParameters objParameters)
         {
             using (SqlCommand cmd = new SqlCommand(Command, Connection))
             {
@@ -99,6 +99,25 @@ namespace SqlUtility
                 int result = await Task.Run(() => cmd.ExecuteNonQuery());
                 Connection.Close();
                 return result;
+            }
+        }
+
+        public object ExecuteObject(string Command, SqlHelperParameters objParameters)
+        {
+            using(DataTable dt = new DataTable())
+            {
+                using (SqlDataAdapter da = new SqlDataAdapter(Command, Connection))
+                {
+                    da.SelectCommand.Parameters.AddRange(objParameters.SqlHelperParameter.ToArray());
+                    da.Fill(dt);
+
+                    object result = null;
+                    if(dt.Rows.Count > 0)
+                    {
+                        result = dt.Rows[0][0];
+                    }
+                    return result;
+                }
             }
         }
     }
