@@ -9,13 +9,6 @@ namespace DBproviderUtility
 {
     public class DBprovider
     {
-        public TResult CreateProvider<T, TResult>(T Model) 
-            where T : class
-            where TResult : class 
-        {
-            return Model as TResult;
-        }
-        
         public SqlTransaction ExecuteTransaction()
         {
             return new SqlTransaction();

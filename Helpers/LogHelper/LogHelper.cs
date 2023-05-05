@@ -18,7 +18,7 @@ namespace LogUtility
         public void SaveErrLog(Exception ex)
         {
             DateTime dtNow = DateTime.Now;
-            string FilePath = FolderPath + $"\\errLog_{dtNow.Year}{dtNow.Month}{dtNow.Day}.txt";
+            string FilePath = FolderPath + $"\\errLog\\errLog_{dtNow.Year}{dtNow.Month}{dtNow.Day}.txt";
             if (Directory.Exists(FolderPath))
             {
                 var stream = File.AppendText(FilePath);

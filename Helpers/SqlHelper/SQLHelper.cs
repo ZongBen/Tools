@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using System.Reflection;
 
-namespace SqlUtility
+namespace BenLai.SqlUtility
 {
     public class SqlHelper
     {
@@ -102,7 +100,7 @@ namespace SqlUtility
             }
         }
 
-        public object ExecuteObject(string Command, SqlHelperParameters objParameters)
+        public IList<object> ExecuteObjList(string Command, SqlHelperParameters objParameters)
         {
             using(DataTable dt = new DataTable())
             {
@@ -111,10 +109,10 @@ namespace SqlUtility
                     da.SelectCommand.Parameters.AddRange(objParameters.SqlHelperParameter.ToArray());
                     da.Fill(dt);
 
-                    object result = null;
-                    if(dt.Rows.Count > 0)
+                    IList<object> result = new List<object>();
+                    foreach(DataRow row in dt.Rows)
                     {
-                        result = dt.Rows[0][0];
+                        result.Add(row[0]);
                     }
                     return result;
                 }
