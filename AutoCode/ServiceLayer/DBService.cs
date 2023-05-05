@@ -73,7 +73,7 @@ namespace ServiceLayer
             {
                 Directory.CreateDirectory(SettingsPath);
             }
-            StreamWriter sw = File.CreateText(SettingsPath + $"\\{item.DataSource}.json");
+            StreamWriter sw = File.CreateText(SettingsPath + $"\\{item.Title}.json");
             sw.Write(JsonConvert.SerializeObject(item, Formatting.Indented));
             sw.Flush();
             sw.Close();

@@ -45,6 +45,7 @@ namespace AutoCode
                     ConnectStr = $"Data Source={Tb_ServerName.Text};Initial Catalog={Tb_DataBaseName.Text};Integrated Security=true";
                     break;
             }
+            Constr_Tb.Text = ConnectStr;
             TableNameList = _Service.GetSqlTablesNameList(ConnectStr);
             this.ConnectStr = ConnectStr;
             Class_Btn.Enabled = true;
@@ -80,6 +81,7 @@ namespace AutoCode
         {
             DBSetting item = new DBSetting
             {
+                Title = Tb_ServerName.Text + "_" + Tb_DataBaseName.Text,
                 DataSource = Tb_ServerName.Text,
                 InitCatalog = Tb_DataBaseName.Text,
                 IntegratedSecurity = (ComboBoxItem)CBB_ServerValid.SelectedItem,

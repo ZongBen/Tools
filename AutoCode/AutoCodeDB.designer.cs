@@ -49,6 +49,8 @@ namespace AutoCode
             this.Class_Btn = new System.Windows.Forms.Button();
             this.InsertSql_Btn = new System.Windows.Forms.Button();
             this.Model_Btn = new System.Windows.Forms.Button();
+            this.Constr_Lb = new System.Windows.Forms.Label();
+            this.Constr_Tb = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // Tb_ServerName
@@ -61,7 +63,7 @@ namespace AutoCode
             // ConnectBtn
             // 
             this.ConnectBtn.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.ConnectBtn.Location = new System.Drawing.Point(78, 263);
+            this.ConnectBtn.Location = new System.Drawing.Point(78, 324);
             this.ConnectBtn.Name = "ConnectBtn";
             this.ConnectBtn.Size = new System.Drawing.Size(319, 32);
             this.ConnectBtn.TabIndex = 2;
@@ -207,7 +209,7 @@ namespace AutoCode
             // 
             this.Class_Btn.Enabled = false;
             this.Class_Btn.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Class_Btn.Location = new System.Drawing.Point(12, 319);
+            this.Class_Btn.Location = new System.Drawing.Point(10, 362);
             this.Class_Btn.Name = "Class_Btn";
             this.Class_Btn.Size = new System.Drawing.Size(132, 50);
             this.Class_Btn.TabIndex = 22;
@@ -219,7 +221,7 @@ namespace AutoCode
             // 
             this.InsertSql_Btn.Enabled = false;
             this.InsertSql_Btn.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.InsertSql_Btn.Location = new System.Drawing.Point(340, 319);
+            this.InsertSql_Btn.Location = new System.Drawing.Point(338, 362);
             this.InsertSql_Btn.Name = "InsertSql_Btn";
             this.InsertSql_Btn.Size = new System.Drawing.Size(132, 50);
             this.InsertSql_Btn.TabIndex = 23;
@@ -231,7 +233,7 @@ namespace AutoCode
             // 
             this.Model_Btn.Enabled = false;
             this.Model_Btn.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Model_Btn.Location = new System.Drawing.Point(171, 319);
+            this.Model_Btn.Location = new System.Drawing.Point(169, 362);
             this.Model_Btn.Name = "Model_Btn";
             this.Model_Btn.Size = new System.Drawing.Size(132, 50);
             this.Model_Btn.TabIndex = 24;
@@ -239,11 +241,31 @@ namespace AutoCode
             this.Model_Btn.UseVisualStyleBackColor = true;
             this.Model_Btn.Click += new System.EventHandler(this.Model_Btn_Click);
             // 
+            // Constr_Lb
+            // 
+            this.Constr_Lb.AutoSize = true;
+            this.Constr_Lb.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Constr_Lb.Location = new System.Drawing.Point(12, 247);
+            this.Constr_Lb.Name = "Constr_Lb";
+            this.Constr_Lb.Size = new System.Drawing.Size(94, 21);
+            this.Constr_Lb.TabIndex = 25;
+            this.Constr_Lb.Text = "連接字串";
+            // 
+            // Constr_Tb
+            // 
+            this.Constr_Tb.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Constr_Tb.Location = new System.Drawing.Point(16, 271);
+            this.Constr_Tb.Name = "Constr_Tb";
+            this.Constr_Tb.Size = new System.Drawing.Size(456, 27);
+            this.Constr_Tb.TabIndex = 26;
+            // 
             // AutoCodeDB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(487, 387);
+            this.ClientSize = new System.Drawing.Size(487, 421);
+            this.Controls.Add(this.Constr_Tb);
+            this.Controls.Add(this.Constr_Lb);
             this.Controls.Add(this.Model_Btn);
             this.Controls.Add(this.InsertSql_Btn);
             this.Controls.Add(this.Class_Btn);
@@ -293,6 +315,8 @@ namespace AutoCode
         private System.Windows.Forms.Button Class_Btn;
         private System.Windows.Forms.Button InsertSql_Btn;
         private System.Windows.Forms.Button Model_Btn;
+        private System.Windows.Forms.Label Constr_Lb;
+        private System.Windows.Forms.TextBox Constr_Tb;
     }
 }
 

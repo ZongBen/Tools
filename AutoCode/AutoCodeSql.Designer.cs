@@ -157,7 +157,7 @@ namespace AutoCode
             this.SbSql_Btn.UseVisualStyleBackColor = true;
             this.SbSql_Btn.Click += new System.EventHandler(this.SbSql_Btn_Click);
             // 
-            // AutoCodeInsertSql
+            // AutoCodeSql
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -173,7 +173,7 @@ namespace AutoCode
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ReturnBtn);
             this.Controls.Add(this.Sql_RichTB);
-            this.Name = "AutoCodeInsertSql";
+            this.Name = "AutoCodeSql";
             this.Text = "AutoCodeInsertSql";
             this.Load += new System.EventHandler(this.AutoCodeInsertSql_Load);
             this.ResumeLayout(false);
