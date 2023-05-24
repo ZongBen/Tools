@@ -80,10 +80,22 @@ namespace BenLai.SqlUtility
         {
             using (SqlCommand cmd = new SqlCommand(Command, Connection))
             {
+                int result;
                 cmd.Parameters.AddRange(objParameters.SqlHelperParameter.ToArray());
                 Connection.Open();
-                int result = cmd.ExecuteNonQuery();
-                Connection.Close();
+                try
+                {
+                    result = cmd.ExecuteNonQuery();
+                }
+                catch
+                {
+                    Connection.Close();
+                    throw;
+                }
+                finally
+                {
+                    Connection.Close();
+                }
                 return result;
             }
         }
@@ -92,10 +104,22 @@ namespace BenLai.SqlUtility
         {
             using (SqlCommand cmd = new SqlCommand(Command, Connection))
             {
+                int result;
                 cmd.Parameters.AddRange(objParameters.SqlHelperParameter.ToArray());
                 Connection.Open();
-                int result = await Task.Run(() => cmd.ExecuteNonQuery());
-                Connection.Close();
+                try
+                {
+                    result = await Task.Run(() => cmd.ExecuteNonQuery());
+                }
+                catch
+                {
+                    Connection.Close();
+                    throw;
+                }
+                finally
+                {
+                    Connection.Close();
+                }
                 return result;
             }
         }
@@ -108,7 +132,6 @@ namespace BenLai.SqlUtility
                 {
                     da.SelectCommand.Parameters.AddRange(objParameters.SqlHelperParameter.ToArray());
                     da.Fill(dt);
-
                     IList<object> result = new List<object>();
                     foreach(DataRow row in dt.Rows)
                     {
@@ -132,7 +155,7 @@ namespace BenLai.SqlUtility
             SqlHelperParameter.Add(new SqlParameter()
             {
                 ParameterName = express,
-                Value = value
+                Value = value ?? Convert.DBNull
             });
         }
     }

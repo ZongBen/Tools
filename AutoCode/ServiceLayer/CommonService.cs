@@ -75,6 +75,9 @@ namespace ServiceLayer
                 case "float":
                     result = "double";
                     break;
+                case "time":
+                    result = "TimeSpan";
+                    break;
                 case "date":
                 case "datetime":
                 case "datetime2":
