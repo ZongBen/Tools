@@ -21,6 +21,7 @@ namespace BenLai.SqlUtility
             {
                 da.SelectCommand.Parameters.AddRange(objParameters.SqlHelperParameter.ToArray());
                 da.Fill(dt);
+                da.SelectCommand.Parameters.Clear();
             }
             PropertyInfo[] properties = typeof(T).GetProperties();
             IList<T> result = new List<T>();
@@ -52,6 +53,7 @@ namespace BenLai.SqlUtility
             {
                 da.SelectCommand.Parameters.AddRange(objParameters.SqlHelperParameter.ToArray());
                 await Task.Run(() => da.Fill(dt));
+                da.SelectCommand.Parameters.Clear();
             }
             PropertyInfo[] properties = typeof(T).GetProperties();
             IList<T> result = new List<T>();
@@ -86,6 +88,7 @@ namespace BenLai.SqlUtility
                 try
                 {
                     result = cmd.ExecuteNonQuery();
+                    cmd.Parameters.Clear();
                 }
                 catch
                 {
@@ -110,6 +113,7 @@ namespace BenLai.SqlUtility
                 try
                 {
                     result = await Task.Run(() => cmd.ExecuteNonQuery());
+                    cmd.Parameters.Clear();
                 }
                 catch
                 {
@@ -132,6 +136,7 @@ namespace BenLai.SqlUtility
                 {
                     da.SelectCommand.Parameters.AddRange(objParameters.SqlHelperParameter.ToArray());
                     da.Fill(dt);
+                    da.SelectCommand.Parameters.Clear();
                     IList<object> result = new List<object>();
                     foreach(DataRow row in dt.Rows)
                     {
