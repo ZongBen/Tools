@@ -4,11 +4,13 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using System.Reflection;
-using DBproviderUtility;
+using SharedHelper.Interface;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace BenLai.SqlUtility
 {
-    public class SqlHelper
+    public class SqlHelper : IDBOperator
     {
         private SqlConnection Connection { get; }
         private DBTransaction DBTrans { get; set; }
@@ -105,6 +107,32 @@ namespace BenLai.SqlUtility
                 }
             }
         }
+
+        public IDBModel<T> Get<T>(T Model) where T : class, new()
+        {
+            StringBuilder SbSql = new StringBuilder();
+            SqlHelperParameters param = new SqlHelperParameters();
+            SbSql.Append("SELECT" + Environment.NewLine);
+            SbSql.Append("	*" + Environment.NewLine);
+            SbSql.Append($"FROM {typeof(T).Name}" + Environment.NewLine);
+            SbSql.Append("WHERE 1=1" + Environment.NewLine);
+            int index = 0;
+            foreach (var prop in typeof(T).GetProperties())
+            {
+                if(prop.GetCustomAttribute<KeyAttribute>() != null)
+                {
+                    SbSql.Append($"AND {prop.Name} = @key_value_{index}");
+                    param.Add($"@key_value_{index}", prop.GetValue(Model));
+                    index++;
+                }
+            }
+            var model_list = ExecuteList<T>(SbSql.ToString(), param);
+            if(model_list.Count > 1)
+            {
+                throw new Exception("查詢到多筆資料");
+            }
+            return new DBModel<T>() { Model = model_list.Count == 1 ? model_list[0] : null };
+        }
     }
 
     public class SqlHelperParameters
@@ -138,5 +166,11 @@ namespace BenLai.SqlUtility
             Trans.Rollback();
             Con.Close();
         }
+    }
+
+
+    internal class DBModel<T> : IDBModel<T>
+    {
+        public T Model { get; set; }
     }
 }

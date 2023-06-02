@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogHelper", "LogHelper\LogH
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBOHelper", "DBprovider\DBOHelper.csproj", "{F34AF406-2FBE-4B7D-ABA1-0F9F8860287B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{2C13061B-52EF-43E7-A942-947ACE365AF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedHelper", "HelperInterface\SharedHelper.csproj", "{D8B8299F-AFD4-417D-AD47-95DB92350E73}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{F34AF406-2FBE-4B7D-ABA1-0F9F8860287B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F34AF406-2FBE-4B7D-ABA1-0F9F8860287B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F34AF406-2FBE-4B7D-ABA1-0F9F8860287B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C13061B-52EF-43E7-A942-947ACE365AF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C13061B-52EF-43E7-A942-947ACE365AF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C13061B-52EF-43E7-A942-947ACE365AF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C13061B-52EF-43E7-A942-947ACE365AF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8B8299F-AFD4-417D-AD47-95DB92350E73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8B8299F-AFD4-417D-AD47-95DB92350E73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8B8299F-AFD4-417D-AD47-95DB92350E73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8B8299F-AFD4-417D-AD47-95DB92350E73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

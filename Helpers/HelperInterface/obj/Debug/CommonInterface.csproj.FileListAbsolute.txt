@@ -1,0 +1,6 @@
+D:\github\Tools\Helpers\HelperInterface\bin\Debug\CommonInterface.dll
+D:\github\Tools\Helpers\HelperInterface\bin\Debug\CommonInterface.pdb
+D:\github\Tools\Helpers\HelperInterface\obj\Debug\CommonInterface.csproj.CoreCompileInputs.cache
+D:\github\Tools\Helpers\HelperInterface\obj\Debug\CommonInterface.dll
+D:\github\Tools\Helpers\HelperInterface\obj\Debug\CommonInterface.pdb
+D:\github\Tools\Helpers\HelperInterface\obj\Debug\CommonInterface.csproj.AssemblyReference.cache

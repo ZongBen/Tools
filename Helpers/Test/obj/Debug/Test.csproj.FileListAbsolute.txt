@@ -1,0 +1,14 @@
+D:\github\Tools\Helpers\Test\bin\Debug\Test.exe.config
+D:\github\Tools\Helpers\Test\bin\Debug\Test.exe
+D:\github\Tools\Helpers\Test\bin\Debug\Test.pdb
+D:\github\Tools\Helpers\Test\bin\Debug\DBOHelper.dll
+D:\github\Tools\Helpers\Test\bin\Debug\SqlHelper.dll
+D:\github\Tools\Helpers\Test\bin\Debug\DBOHelper.pdb
+D:\github\Tools\Helpers\Test\bin\Debug\SqlHelper.pdb
+D:\github\Tools\Helpers\Test\obj\Debug\Test.csproj.AssemblyReference.cache
+D:\github\Tools\Helpers\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
+D:\github\Tools\Helpers\Test\obj\Debug\Test.csproj.CopyComplete
+D:\github\Tools\Helpers\Test\obj\Debug\Test.exe
+D:\github\Tools\Helpers\Test\obj\Debug\Test.pdb
+D:\github\Tools\Helpers\Test\bin\Debug\SharedHelper.dll
+D:\github\Tools\Helpers\Test\bin\Debug\SharedHelper.pdb

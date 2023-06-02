@@ -45,5 +45,11 @@
     <Compile Include="DBOHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HelperInterface\SharedHelper.csproj">
+      <Project>{d8b8299f-afd4-417d-ad47-95db92350e73}</Project>
+      <Name>SharedHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

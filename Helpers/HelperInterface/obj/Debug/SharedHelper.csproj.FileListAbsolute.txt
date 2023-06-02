@@ -1,0 +1,6 @@
+D:\github\Tools\Helpers\HelperInterface\bin\Debug\SharedHelper.dll
+D:\github\Tools\Helpers\HelperInterface\bin\Debug\SharedHelper.pdb
+D:\github\Tools\Helpers\HelperInterface\obj\Debug\SharedHelper.csproj.CoreCompileInputs.cache
+D:\github\Tools\Helpers\HelperInterface\obj\Debug\SharedHelper.dll
+D:\github\Tools\Helpers\HelperInterface\obj\Debug\SharedHelper.pdb
+D:\github\Tools\Helpers\HelperInterface\obj\Debug\SharedHelper.csproj.AssemblyReference.cache
