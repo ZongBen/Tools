@@ -14,19 +14,26 @@ namespace DBproviderUtility
     {
         public object CreateProvider(string AssemblyName, string ProviderName)
         {
-            return Assembly.Load(AssemblyName).CreateInstance($"{AssemblyName}.{ProviderName}");
+            return Assembly.Load(AssemblyName).CreateInstance($"{AssemblyName}.{ProviderName}", false, BindingFlags.Default, null, new object[] { false }, null, null);
         }
 
         public object CreateProvider(string AssemblyName, string ProviderName, out IDBTransaction DBTrans)
         {
-            DBTrans = (IDBTransaction)Assembly.Load("SqlHelper").CreateInstance("BenLai.SqlUtility.DBTransaction");
-            return Assembly.Load(AssemblyName).CreateInstance($"{AssemblyName}.{ProviderName}", false, BindingFlags.Default, null, new object[] { DBTrans }, null, null);
+            var asm = Assembly.Load(AssemblyName).CreateInstance($"{AssemblyName}.{ProviderName}", false, BindingFlags.Default, null, new object[] { true }, null, null);
+            DBTrans = (IDBTransaction)asm;
+            return asm;
         }
         
         public IDBOperator ExecuteOperator(string AssemblyName, string ProviderName)
         {
-            return (IDBOperator)Assembly.Load(AssemblyName).CreateInstance($"{AssemblyName}.{ProviderName}");
+            return (IDBOperator)Assembly.Load(AssemblyName).CreateInstance($"{AssemblyName}.{ProviderName}", false, BindingFlags.Default, null, new object[] { false }, null, null);
         }
-        
+
+        public IDBOperator ExecuteOperator(string AssemblyName, string ProviderName, out IDBTransaction DBTrans)
+        {
+            var asm = Assembly.Load(AssemblyName).CreateInstance($"{AssemblyName}.{ProviderName}", false, BindingFlags.Default, null, new object[] { true }, null, null);
+            DBTrans = (IDBTransaction)asm;
+            return (IDBOperator)asm;
+        }
     }
 }

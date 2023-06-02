@@ -10,19 +10,19 @@ using System.Text;
 
 namespace BenLai.SqlUtility
 {
-    public class SqlHelper : IDBOperator
+    public class SqlHelper : IDBOperator, IDBTransaction
     {
         private SqlConnection Connection { get; }
         private DBTransaction DBTrans { get; set; }
-        public SqlHelper(string ConnectionString)
+        public SqlHelper(string ConnectionString, bool ExecuteTransaction)
         {
             Connection = new SqlConnection(ConnectionString);
-        }
-        public SqlHelper(string ConnectionString, DBTransaction DBTrans)
-        {
-            Connection = new SqlConnection(ConnectionString);
-            DBTrans.Con = Connection;
-            this.DBTrans = DBTrans;
+            if (ExecuteTransaction)
+            {
+                DBTrans = new DBTransaction() { 
+                    Con = Connection
+                };
+            }
         }
 
         public IList<T> ExecuteList<T>(string Command, SqlHelperParameters objParameters) where T : class, new()
@@ -63,11 +63,17 @@ namespace BenLai.SqlUtility
             {
                 int result;
                 cmd.Parameters.AddRange(objParameters.SqlHelperParameter.ToArray());
-                Connection.Open();
+                if(Connection.State != ConnectionState.Open)
+                {
+                    Connection.Open();
+                }
                 if(DBTrans != null)
                 {
-                    cmd.Transaction = Connection.BeginTransaction();
-                    DBTrans.Trans = cmd.Transaction;
+                    if(DBTrans.Trans == null)
+                    {
+                        DBTrans.Trans = Connection.BeginTransaction();
+                    }
+                    cmd.Transaction = DBTrans.Trans;
                 }
                 try
                 {
@@ -133,6 +139,15 @@ namespace BenLai.SqlUtility
             }
             return new DBModel<T>() { Model = model_list.Count == 1 ? model_list[0] : null };
         }
+
+        public void Commit()
+        {
+            DBTrans.Commit();
+        }
+        public void RollBack()
+        {
+            DBTrans.RollBack();
+        }
     }
 
     public class SqlHelperParameters
@@ -151,11 +166,11 @@ namespace BenLai.SqlUtility
             });
         }
     }
-
-    public class DBTransaction : IDBTransaction
+    
+    internal class DBTransaction : IDBTransaction
     {
-        internal SqlTransaction Trans { get; set; }
-        internal SqlConnection Con { get; set; }
+        public SqlTransaction Trans { get; set; }
+        public SqlConnection Con { get; set; }
         public void Commit()
         {
             Trans.Commit();
@@ -167,7 +182,6 @@ namespace BenLai.SqlUtility
             Con.Close();
         }
     }
-
 
     internal class DBModel<T> : IDBModel<T>
     {
