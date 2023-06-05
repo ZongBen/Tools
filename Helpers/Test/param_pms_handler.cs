@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharedHelper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace Test
 {
     public class param_pms_handler
     {
+        [Identity]
         public int? param_pms_handler_cd { get; set; }
         public string param_pms_handler_name { get; set; }
     }

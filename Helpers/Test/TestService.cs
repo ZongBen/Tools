@@ -14,24 +14,32 @@ namespace Test
         public TestService()
         {
             //var _provider = (ITestProvider)CreateProvider("Test", "TestProvider");
-            var _provider = (ITestProvider)CreateProvider("Test", "TestProvider", out IDBTransaction db_trans);
-            //var dbOperator = ExecuteOperator("Test", "TestProvider");
-            //var a = dbOperator.Get(new param_pms_state() { param_pms_state_cd = "T" });
-
+            //var _provider = (ITestProvider)CreateProvider("Test", "TestProvider", out IDBTransaction db_trans);
+            var dbOperator = ExecuteOperator("Test", "TestProvider", out IDBTransaction db_trans);
             try
             {
-                _provider.Insert(new param_pms_state()
+                /*
+                dbOperator.Insert(new param_pms_state()
                 {
                     param_pms_state_cd = "T",
                     param_pms_state_name = "測試",
                     param_pms_state_sort = 100
                 });
-                _provider.Insert(new param_pms_state()
+                */
+
+                var a = dbOperator.GetByKey(new param_pms_state
                 {
-                    param_pms_state_cd = "W",
-                    param_pms_state_name = "測試2",
-                    param_pms_state_sort = 100
+                    param_pms_state_cd = "T"
                 });
+
+                dbOperator.Update(a, x =>
+                {
+                    x.param_pms_state_name = "測試2";
+                    x.param_pms_state_sort = null;
+                });
+
+                dbOperator.Delete(a.Model);
+
                 db_trans.Commit();
             }
             catch(Exception ex)

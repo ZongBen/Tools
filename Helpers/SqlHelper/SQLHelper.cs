@@ -7,6 +7,7 @@ using System.Reflection;
 using SharedHelper.Interface;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using SharedHelper;
 
 namespace BenLai.SqlUtility
 {
@@ -30,6 +31,18 @@ namespace BenLai.SqlUtility
             DataTable dt = new DataTable();
             using (SqlDataAdapter da = new SqlDataAdapter(Command, Connection))
             {
+                if (Connection.State != ConnectionState.Open)
+                {
+                    Connection.Open();
+                }
+                if (DBTrans != null)
+                {
+                    if (DBTrans.Trans == null)
+                    {
+                        DBTrans.Trans = Connection.BeginTransaction();
+                    }
+                    da.SelectCommand.Transaction = DBTrans.Trans;
+                }
                 da.SelectCommand.Parameters.AddRange(objParameters.SqlHelperParameter.ToArray());
                 da.Fill(dt);
                 da.SelectCommand.Parameters.Clear();
@@ -114,7 +127,7 @@ namespace BenLai.SqlUtility
             }
         }
 
-        public IDBModel<T> Get<T>(T Model) where T : class, new()
+        public IDBModel<T> GetByKey<T>(T Model) where T : class, new()
         {
             StringBuilder SbSql = new StringBuilder();
             SqlHelperParameters param = new SqlHelperParameters();
@@ -122,14 +135,12 @@ namespace BenLai.SqlUtility
             SbSql.Append("	*" + Environment.NewLine);
             SbSql.Append($"FROM {typeof(T).Name}" + Environment.NewLine);
             SbSql.Append("WHERE 1=1" + Environment.NewLine);
-            int index = 0;
             foreach (var prop in typeof(T).GetProperties())
             {
                 if(prop.GetCustomAttribute<KeyAttribute>() != null)
                 {
-                    SbSql.Append($"AND {prop.Name} = @key_value_{index}");
-                    param.Add($"@key_value_{index}", prop.GetValue(Model));
-                    index++;
+                    SbSql.Append($"AND {prop.Name} = @{prop.Name}");
+                    param.Add($"@{prop.Name}", prop.GetValue(Model));
                 }
             }
             var model_list = ExecuteList<T>(SbSql.ToString(), param);
@@ -140,6 +151,69 @@ namespace BenLai.SqlUtility
             return new DBModel<T>() { Model = model_list.Count == 1 ? model_list[0] : null };
         }
 
+        public int Insert<T>(T Model) where T : class, new()
+        {
+            SqlHelperParameters param = new SqlHelperParameters();
+            StringBuilder SbCol = new StringBuilder();
+            StringBuilder SbVal = new StringBuilder();
+            foreach (var prop in typeof(T).GetProperties())
+            {
+                if(prop.GetCustomAttribute<IdentityAttribute>() != null)
+                {
+                    continue;
+                }
+                SbCol.Append($", {prop.Name}");
+                SbVal.Append($", @{prop.Name}");
+                param.Add($"@{prop.Name}", prop.GetValue(Model));
+            }
+            string sqlQuery = BuildInsertSql(typeof(T).Name, SbCol.ToString().Remove(0, 2), SbVal.ToString().Remove(0, 2));
+            return ExecuteNonQuery(sqlQuery, param);
+        }
+
+        public int Update<T>(IDBModel<T> dbModel, Action<T> action = null) where T : class, new()
+        {
+            if(action != null)
+            {
+                action.Invoke(dbModel.Model);
+            }
+            SqlHelperParameters param = new SqlHelperParameters();
+            StringBuilder SbUpd = new StringBuilder();
+            StringBuilder SbKey = new StringBuilder();
+            foreach(var prop in typeof(T).GetProperties())
+            {
+                if (prop.GetCustomAttribute<IdentityAttribute>() != null)
+                {
+                    continue;
+                }
+                if (prop.GetCustomAttribute<KeyAttribute>() != null)
+                {
+                    SbKey.Append($"AND {prop.Name} = @{prop.Name}");
+                    param.Add($"@{prop.Name}", prop.GetValue(dbModel.Model));
+                    continue;
+                }
+                SbUpd.Append($",{prop.Name} = @{prop.Name}" + Environment.NewLine);
+                param.Add($"@{prop.Name}", prop.GetValue(dbModel.Model));
+            }
+            string sqlQuery = BuildUpdSql(typeof(T).Name, SbUpd.ToString().Remove(0, 1), SbKey.ToString());
+            return ExecuteNonQuery(sqlQuery, param);
+        }
+
+        public int Delete<T>(T Model) where T : class, new()
+        {
+            StringBuilder SbDel = new StringBuilder();
+            SqlHelperParameters param = new SqlHelperParameters();
+            foreach (var prop in typeof(T).GetProperties())
+            {
+                if (prop.GetCustomAttribute<KeyAttribute>() != null)
+                {
+                    SbDel.Append($"AND {prop.Name} = @{prop.Name}");
+                    param.Add($"@{prop.Name}", prop.GetValue(Model));
+                }
+            }
+            string sqlQueyr = BuildDelSql(typeof(T).Name, SbDel.ToString());
+            return ExecuteNonQuery(sqlQueyr, param);
+        }
+
         public void Commit()
         {
             DBTrans.Commit();
@@ -147,6 +221,48 @@ namespace BenLai.SqlUtility
         public void RollBack()
         {
             DBTrans.RollBack();
+        }
+
+        private string BuildDelSql(string TableName, string Key)
+        {
+            if (string.IsNullOrEmpty(Key))
+            {
+                throw new Exception("唯一鍵值不可為空");
+            }
+            StringBuilder SbSql = new StringBuilder();
+            SbSql.Append($"DELETE FROM {TableName}" + Environment.NewLine);
+            SbSql.Append("WHERE 1=1" + Environment.NewLine);
+            SbSql.Append(Key);
+            return SbSql.ToString();
+        }
+
+        private string BuildUpdSql(string TableName, string ColVal, string Key)
+        {
+            if (string.IsNullOrEmpty(Key))
+            {
+                throw new Exception("唯一鍵值不可為空");
+            }
+            StringBuilder SbSql = new StringBuilder();
+            SbSql.Append($"UPDATE {TableName}" + Environment.NewLine);
+            SbSql.Append("SET" + Environment.NewLine);
+            SbSql.Append(ColVal);
+            SbSql.Append("WHERE 1=1" + Environment.NewLine);
+            SbSql.Append(Key);
+            return SbSql.ToString();
+        }
+
+        private string BuildInsertSql(string TableName, string Col, string Val)
+        {
+            StringBuilder SbSql = new StringBuilder();
+            SbSql.Append($"INSERT INTO {TableName}" + Environment.NewLine);
+            SbSql.Append("(");
+            SbSql.Append(Col);
+            SbSql.Append(")" + Environment.NewLine);
+            SbSql.Append("VALUES" + Environment.NewLine);
+            SbSql.Append("(");
+            SbSql.Append(Val);
+            SbSql.Append(")");
+            return SbSql.ToString();
         }
     }
 

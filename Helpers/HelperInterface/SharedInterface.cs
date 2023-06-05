@@ -14,8 +14,10 @@ namespace SharedHelper.Interface
 
     public interface IDBOperator
     {
-        IDBModel<T> Get<T>(T Model) where T : class, new();
-        //int SaveChange<T>(IDBModel<T> Model) where T : class, new();
+        IDBModel<T> GetByKey<T>(T Model) where T : class, new();
+        int Insert<T>(T Model) where T : class, new();
+        int Update<T>(IDBModel<T> dbModel, Action<T> action = null) where T : class, new();
+        int Delete<T>(T Model) where T : class, new();
     }
 
     public interface IDBModel<T>

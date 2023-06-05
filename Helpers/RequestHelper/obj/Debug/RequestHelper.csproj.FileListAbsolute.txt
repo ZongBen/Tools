@@ -1,0 +1,6 @@
+D:\Ben\Tools\Helpers\RequestHelper\bin\Debug\RequestHelper.dll
+D:\Ben\Tools\Helpers\RequestHelper\bin\Debug\RequestHelper.pdb
+D:\Ben\Tools\Helpers\RequestHelper\obj\Debug\RequestHelper.csproj.AssemblyReference.cache
+D:\Ben\Tools\Helpers\RequestHelper\obj\Debug\RequestHelper.csproj.CoreCompileInputs.cache
+D:\Ben\Tools\Helpers\RequestHelper\obj\Debug\RequestHelper.dll
+D:\Ben\Tools\Helpers\RequestHelper\obj\Debug\RequestHelper.pdb

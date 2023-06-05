@@ -1,0 +1,6 @@
+D:\Ben\Tools\Helpers\LogHelper\bin\Debug\LogHelper.dll
+D:\Ben\Tools\Helpers\LogHelper\bin\Debug\LogHelper.pdb
+D:\Ben\Tools\Helpers\LogHelper\obj\Debug\LogHelper.csproj.AssemblyReference.cache
+D:\Ben\Tools\Helpers\LogHelper\obj\Debug\LogHelper.csproj.CoreCompileInputs.cache
+D:\Ben\Tools\Helpers\LogHelper\obj\Debug\LogHelper.dll
+D:\Ben\Tools\Helpers\LogHelper\obj\Debug\LogHelper.pdb
