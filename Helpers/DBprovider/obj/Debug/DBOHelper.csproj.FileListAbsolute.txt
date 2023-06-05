@@ -7,3 +7,12 @@ D:\Ben\Tools\Helpers\DBprovider\obj\Debug\DBOHelper.csproj.CoreCompileInputs.cac
 D:\Ben\Tools\Helpers\DBprovider\obj\Debug\DBOHelper.csproj.CopyComplete
 D:\Ben\Tools\Helpers\DBprovider\obj\Debug\DBOHelper.dll
 D:\Ben\Tools\Helpers\DBprovider\obj\Debug\DBOHelper.pdb
+D:\github\Tools\Helpers\DBprovider\bin\Debug\DBOHelper.dll
+D:\github\Tools\Helpers\DBprovider\bin\Debug\DBOHelper.pdb
+D:\github\Tools\Helpers\DBprovider\bin\Debug\SharedHelper.dll
+D:\github\Tools\Helpers\DBprovider\bin\Debug\SharedHelper.pdb
+D:\github\Tools\Helpers\DBprovider\obj\Debug\DBOHelper.csproj.AssemblyReference.cache
+D:\github\Tools\Helpers\DBprovider\obj\Debug\DBOHelper.csproj.CoreCompileInputs.cache
+D:\github\Tools\Helpers\DBprovider\obj\Debug\DBOHelper.csproj.CopyComplete
+D:\github\Tools\Helpers\DBprovider\obj\Debug\DBOHelper.dll
+D:\github\Tools\Helpers\DBprovider\obj\Debug\DBOHelper.pdb

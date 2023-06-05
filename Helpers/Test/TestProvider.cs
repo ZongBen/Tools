@@ -10,7 +10,7 @@ namespace Test
 {
     public class TestProvider : SqlHelper, ITestProvider
     {
-        public TestProvider(bool ExecuteTrans) : base("Data Source=BENLAI\\SQLEXPRESS;Initial Catalog=PeaHie;Integrated Security=true", ExecuteTrans) { }
+        public TestProvider(bool ExecuteTrans) : base("Data Source=EKERA-PG7;Initial Catalog=PMS_TEST;Integrated Security=true", ExecuteTrans) { }
 
         public IList<param_pms_state> Get()
         {

@@ -9,3 +9,12 @@ D:\Ben\Tools\Helpers\SqlHelper\obj\Debug\SQLHelper.csproj.CoreCompileInputs.cach
 D:\Ben\Tools\Helpers\SqlHelper\obj\Debug\SQLHelper.csproj.CopyComplete
 D:\Ben\Tools\Helpers\SqlHelper\obj\Debug\SqlHelper.dll
 D:\Ben\Tools\Helpers\SqlHelper\obj\Debug\SqlHelper.pdb
+D:\github\Tools\Helpers\SqlHelper\bin\Debug\SqlHelper.dll
+D:\github\Tools\Helpers\SqlHelper\bin\Debug\SqlHelper.pdb
+D:\github\Tools\Helpers\SqlHelper\bin\Debug\SharedHelper.dll
+D:\github\Tools\Helpers\SqlHelper\bin\Debug\SharedHelper.pdb
+D:\github\Tools\Helpers\SqlHelper\obj\Debug\SQLHelper.csproj.AssemblyReference.cache
+D:\github\Tools\Helpers\SqlHelper\obj\Debug\SQLHelper.csproj.CoreCompileInputs.cache
+D:\github\Tools\Helpers\SqlHelper\obj\Debug\SQLHelper.csproj.CopyComplete
+D:\github\Tools\Helpers\SqlHelper\obj\Debug\SqlHelper.dll
+D:\github\Tools\Helpers\SqlHelper\obj\Debug\SqlHelper.pdb

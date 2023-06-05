@@ -114,6 +114,18 @@ namespace BenLai.SqlUtility
             {
                 using (SqlDataAdapter da = new SqlDataAdapter(Command, Connection))
                 {
+                    if (Connection.State != ConnectionState.Open)
+                    {
+                        Connection.Open();
+                    }
+                    if (DBTrans != null)
+                    {
+                        if (DBTrans.Trans == null)
+                        {
+                            DBTrans.Trans = Connection.BeginTransaction();
+                        }
+                        da.SelectCommand.Transaction = DBTrans.Trans;
+                    }
                     da.SelectCommand.Parameters.AddRange(objParameters.SqlHelperParameter.ToArray());
                     da.Fill(dt);
                     da.SelectCommand.Parameters.Clear();
@@ -218,9 +230,9 @@ namespace BenLai.SqlUtility
         {
             DBTrans.Commit();
         }
-        public void RollBack()
+        public void Rollback()
         {
-            DBTrans.RollBack();
+            DBTrans.Rollback();
         }
 
         private string BuildDelSql(string TableName, string Key)
@@ -292,7 +304,7 @@ namespace BenLai.SqlUtility
             Trans.Commit();
             Con.Close();
         }
-        public void RollBack()
+        public void Rollback()
         {
             Trans.Rollback();
             Con.Close();

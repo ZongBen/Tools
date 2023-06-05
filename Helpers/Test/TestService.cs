@@ -13,9 +13,8 @@ namespace Test
     {
         public TestService()
         {
-            //var _provider = (ITestProvider)CreateProvider("Test", "TestProvider");
-            //var _provider = (ITestProvider)CreateProvider("Test", "TestProvider", out IDBTransaction db_trans);
-            var dbOperator = ExecuteOperator("Test", "TestProvider", out IDBTransaction db_trans);
+            var _provider = (ITestProvider)CreateProvider("Test", "Test", "TestProvider", out IDBTransaction db_trans);
+            var dbOperator = ExecuteOperator(_provider);
             try
             {
                 /*
@@ -44,7 +43,7 @@ namespace Test
             }
             catch(Exception ex)
             {
-                db_trans.RollBack();
+                db_trans.Rollback();
             }
         }
     }

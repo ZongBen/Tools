@@ -9,7 +9,7 @@ namespace SharedHelper.Interface
     public interface IDBTransaction
     {
         void Commit();
-        void RollBack();
+        void Rollback();
     }
 
     public interface IDBOperator

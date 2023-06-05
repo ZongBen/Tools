@@ -12,28 +12,21 @@ namespace DBproviderUtility
 {
     public class DBOHelper
     {
-        public object CreateProvider(string AssemblyName, string ProviderName)
+        public object CreateProvider(string AssemblyName, string NameSapce, string ProviderName)
         {
-            return Assembly.Load(AssemblyName).CreateInstance($"{AssemblyName}.{ProviderName}", false, BindingFlags.Default, null, new object[] { false }, null, null);
+            return Assembly.Load(AssemblyName).CreateInstance($"{NameSapce}.{ProviderName}", false, BindingFlags.Default, null, new object[] { false }, null, null);
         }
 
-        public object CreateProvider(string AssemblyName, string ProviderName, out IDBTransaction DBTrans)
+        public object CreateProvider(string AssemblyName, string NameSapce, string ProviderName, out IDBTransaction DBTrans)
         {
-            var asm = Assembly.Load(AssemblyName).CreateInstance($"{AssemblyName}.{ProviderName}", false, BindingFlags.Default, null, new object[] { true }, null, null);
+            var asm = Assembly.Load(AssemblyName).CreateInstance($"{NameSapce}.{ProviderName}", false, BindingFlags.Default, null, new object[] { true }, null, null);
             DBTrans = (IDBTransaction)asm;
             return asm;
         }
         
-        public IDBOperator ExecuteOperator(string AssemblyName, string ProviderName)
+        public IDBOperator ExecuteOperator(object InstancedProvider)
         {
-            return (IDBOperator)Assembly.Load(AssemblyName).CreateInstance($"{AssemblyName}.{ProviderName}", false, BindingFlags.Default, null, new object[] { false }, null, null);
-        }
-
-        public IDBOperator ExecuteOperator(string AssemblyName, string ProviderName, out IDBTransaction DBTrans)
-        {
-            var asm = Assembly.Load(AssemblyName).CreateInstance($"{AssemblyName}.{ProviderName}", false, BindingFlags.Default, null, new object[] { true }, null, null);
-            DBTrans = (IDBTransaction)asm;
-            return (IDBOperator)asm;
+            return (IDBOperator)InstancedProvider;
         }
     }
 }
