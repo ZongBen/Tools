@@ -14,7 +14,7 @@ namespace BenLai.SqlUtility
     public class SqlHelper : IDBOperator, IDBTransaction
     {
         private SqlConnection Connection { get; }
-        private DBTransaction DBTrans { get; set; }
+        private DBTransaction DBTrans { get; }
         public SqlHelper(string ConnectionString, bool ExecuteTransaction)
         {
             Connection = new SqlConnection(ConnectionString);
@@ -37,22 +37,17 @@ namespace BenLai.SqlUtility
                 }
                 if (DBTrans != null)
                 {
-                    if (DBTrans.Trans == null)
-                    {
-                        DBTrans.Trans = Connection.BeginTransaction();
-                    }
-                    da.SelectCommand.Transaction = DBTrans.Trans;
+                    da.SelectCommand.Transaction = DBTrans.Trans ?? Connection.BeginTransaction();
                 }
                 da.SelectCommand.Parameters.AddRange(objParameters.SqlHelperParameter.ToArray());
                 da.Fill(dt);
                 da.SelectCommand.Parameters.Clear();
             }
-            PropertyInfo[] properties = typeof(T).GetProperties();
             IList<T> result = new List<T>();
             foreach (DataRow row in dt.Rows)
             { 
                 T item = new T();
-                foreach (var prop in properties)
+                foreach (var prop in typeof(T).GetProperties())
                 {
                     if (!dt.Columns.Contains(prop.Name))
                     {
@@ -82,11 +77,7 @@ namespace BenLai.SqlUtility
                 }
                 if(DBTrans != null)
                 {
-                    if(DBTrans.Trans == null)
-                    {
-                        DBTrans.Trans = Connection.BeginTransaction();
-                    }
-                    cmd.Transaction = DBTrans.Trans;
+                    cmd.Transaction = DBTrans.Trans ?? Connection.BeginTransaction();
                 }
                 try
                 {
@@ -120,11 +111,7 @@ namespace BenLai.SqlUtility
                     }
                     if (DBTrans != null)
                     {
-                        if (DBTrans.Trans == null)
-                        {
-                            DBTrans.Trans = Connection.BeginTransaction();
-                        }
-                        da.SelectCommand.Transaction = DBTrans.Trans;
+                        da.SelectCommand.Transaction = DBTrans.Trans ?? Connection.BeginTransaction();
                     }
                     da.SelectCommand.Parameters.AddRange(objParameters.SqlHelperParameter.ToArray());
                     da.Fill(dt);

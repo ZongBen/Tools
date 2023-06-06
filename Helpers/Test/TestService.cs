@@ -37,7 +37,7 @@ namespace Test
                     x.param_pms_state_sort = null;
                 });
 
-                dbOperator.Delete(a.Model);
+                //dbOperator.Delete(a.Model);
 
                 db_trans.Commit();
             }

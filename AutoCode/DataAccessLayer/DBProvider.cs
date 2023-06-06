@@ -13,7 +13,7 @@ namespace DataAccessLayer
     {
         public IList<TableColumns> GetTableColumns(string TableName, string Constr)
         {
-            SqlHelper helper = new SqlHelper(Constr);
+            SqlHelper helper = new SqlHelper(Constr, false);
             StringBuilder SbSql = new StringBuilder();
             SqlHelperParameters parameters = new SqlHelperParameters();
             SbSql.Append("SELECT" + Environment.NewLine);

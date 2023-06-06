@@ -100,13 +100,12 @@ namespace AutoCode
             // 
             // RecoverBtn
             // 
-            this.RecoverBtn.Enabled = false;
             this.RecoverBtn.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.RecoverBtn.Location = new System.Drawing.Point(75, 595);
             this.RecoverBtn.Name = "RecoverBtn";
             this.RecoverBtn.Size = new System.Drawing.Size(218, 35);
             this.RecoverBtn.TabIndex = 17;
-            this.RecoverBtn.Text = "還原(暫無功能)";
+            this.RecoverBtn.Text = "還原";
             this.RecoverBtn.UseVisualStyleBackColor = true;
             this.RecoverBtn.Click += new System.EventHandler(this.RecoverBtn_Click);
             // 

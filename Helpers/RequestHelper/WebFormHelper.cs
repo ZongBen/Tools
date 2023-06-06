@@ -11,9 +11,8 @@ namespace WebFormUtility
     {
         public static T Get<T>() where T : class, new()
         {
-            PropertyInfo[] properties = typeof(T).GetProperties();
             T result = new T();
-            foreach (var prop in properties)
+            foreach (var prop in typeof(T).GetProperties())
             {
                 string value = HttpContext.Current.Request.QueryString[prop.Name];
                 if (!string.IsNullOrEmpty(value))
@@ -27,9 +26,8 @@ namespace WebFormUtility
 
         public static T Post<T>() where T : class, new()
         {
-            PropertyInfo[] properties = typeof(T).GetProperties();
             T result = new T();
-            foreach (var prop in properties)
+            foreach (var prop in typeof(T).GetProperties())
             {
                 string value = HttpContext.Current.Request.Form[prop.Name];
                 if (!string.IsNullOrEmpty(value))
@@ -42,19 +40,21 @@ namespace WebFormUtility
         }
     }
 
-    public class ResponseHelper
+    public class ResponseHelper : Page
     {
+        /*
         private readonly Page page;
         public ResponseHelper(Page page)
         {
             this.page = page;
         }
+        */
         public void ResModel<T>(T Item) where T : class, new()
         {
             var properties = typeof(T).GetProperties();
             foreach (var prop in properties)
             {
-                var control = page.FindControl(prop.Name);
+                var control = FindControl(prop.Name);
                 if (control != null)
                 {
                     DisplayValue(control, prop.GetValue(Item));
