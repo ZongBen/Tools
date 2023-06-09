@@ -32,9 +32,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SharedHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BenLai.SharedHelper.1.0.3\lib\net48\SharedHelper.dll</HintPath>
+    </Reference>
     <Reference Include="SqlHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Helpers\SqlHelper\bin\Debug\SqlHelper.dll</HintPath>
+      <HintPath>..\packages\BenLai.SqlUtility.2.1.1\lib\net48\SqlHelper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -55,6 +57,9 @@
       <Project>{eef696b8-f999-4d74-9d0c-317ee2982768}</Project>
       <Name>ParametersLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
