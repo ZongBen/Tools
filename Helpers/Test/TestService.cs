@@ -14,30 +14,17 @@ namespace Test
         public TestService()
         {
             var _provider = (ITestProvider)CreateProvider("Test", "Test", "TestProvider", out IDBTransaction db_trans);
-            var dbOperator = ExecuteOperator(_provider);
+            //var dbOperator = ExecuteOperator(_provider);
+            var dbo = ExecuteOperator<param_pms_state>(_provider);
             try
             {
-                /*
-                dbOperator.Insert(new param_pms_state()
-                {
-                    param_pms_state_cd = "T",
-                    param_pms_state_name = "測試",
-                    param_pms_state_sort = 100
-                });
-                */
-
-                var a = dbOperator.GetByKey(new param_pms_state
+                var a = dbo.Get(new param_pms_state()
                 {
                     param_pms_state_cd = "T"
                 });
 
-                dbOperator.Update(a, x =>
-                {
-                    x.param_pms_state_name = "測試2";
-                    x.param_pms_state_sort = null;
-                });
-
-                //dbOperator.Delete(a.Model);
+                IEnumerable<param_pms_state> b = a.Where(x => x.param_pms_seq == 1);
+                List<param_pms_state> c = b.ToList();
 
                 db_trans.Commit();
             }

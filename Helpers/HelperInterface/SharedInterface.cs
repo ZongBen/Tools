@@ -24,4 +24,12 @@ namespace SharedHelper.Interface
     {
         T Model { get; }
     }
+
+    public interface IDBOperator<T> where T : class, new()
+    {
+        IList<T> Get(T Model);
+        int Insert(T Model);
+        int Update(T Model);
+        int Delete(T Model);
+    }
 }

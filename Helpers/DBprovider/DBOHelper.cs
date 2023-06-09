@@ -28,5 +28,10 @@ namespace DBproviderUtility
         {
             return (IDBOperator)InstancedProvider;
         }
+
+        public IDBOperator<T> ExecuteOperator<T>(object InstancedProvider) where T : class, new()
+        {
+            return (IDBOperator<T>)InstancedProvider;
+        }
     }
 }

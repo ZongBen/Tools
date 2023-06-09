@@ -37,7 +37,7 @@ namespace BenLai.SqlUtility
                 }
                 if (DBTrans != null)
                 {
-                    da.SelectCommand.Transaction = DBTrans.Trans ?? Connection.BeginTransaction();
+                    da.SelectCommand.Transaction = DBTrans.Trans = DBTrans.Trans ?? Connection.BeginTransaction();
                 }
                 da.SelectCommand.Parameters.AddRange(objParameters.SqlHelperParameter.ToArray());
                 da.Fill(dt);
@@ -77,7 +77,7 @@ namespace BenLai.SqlUtility
                 }
                 if(DBTrans != null)
                 {
-                    cmd.Transaction = DBTrans.Trans ?? Connection.BeginTransaction();
+                    cmd.Transaction = DBTrans.Trans = DBTrans.Trans ?? Connection.BeginTransaction();
                 }
                 try
                 {
@@ -111,7 +111,7 @@ namespace BenLai.SqlUtility
                     }
                     if (DBTrans != null)
                     {
-                        da.SelectCommand.Transaction = DBTrans.Trans ?? Connection.BeginTransaction();
+                        da.SelectCommand.Transaction = DBTrans.Trans = DBTrans.Trans ?? Connection.BeginTransaction();
                     }
                     da.SelectCommand.Parameters.AddRange(objParameters.SqlHelperParameter.ToArray());
                     da.Fill(dt);
@@ -180,14 +180,14 @@ namespace BenLai.SqlUtility
             StringBuilder SbKey = new StringBuilder();
             foreach(var prop in typeof(T).GetProperties())
             {
-                if (prop.GetCustomAttribute<IdentityAttribute>() != null)
-                {
-                    continue;
-                }
                 if (prop.GetCustomAttribute<KeyAttribute>() != null)
                 {
                     SbKey.Append($"AND {prop.Name} = @{prop.Name}");
                     param.Add($"@{prop.Name}", prop.GetValue(dbModel.Model));
+                    continue;
+                }
+                if (prop.GetCustomAttribute<IdentityAttribute>() != null)
+                {
                     continue;
                 }
                 SbUpd.Append($",{prop.Name} = @{prop.Name}" + Environment.NewLine);
