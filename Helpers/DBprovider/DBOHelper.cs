@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Transactions;
 using System.Data.SqlClient;
 using System.Reflection;
-using SharedHelper.Interface;
+using BenLai.SharedHelper.Interface;
 
-namespace DBproviderUtility
+namespace BenLai.DBproviderUtility
 {
     public class DBOHelper
     {

@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using System.Reflection;
-using SharedHelper.Interface;
+using BenLai.SharedHelper.Interface;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
-using SharedHelper;
+using BenLai.SharedHelper;
 
 namespace BenLai.SqlUtility
 {

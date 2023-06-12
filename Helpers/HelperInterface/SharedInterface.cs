@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SharedHelper.Interface
+namespace BenLai.SharedHelper.Interface
 {
     public interface IDBTransaction
     {
