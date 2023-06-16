@@ -42,6 +42,10 @@ namespace BenLai.SqlUtility
                 da.SelectCommand.Parameters.AddRange(objParameters.SqlHelperParameter.ToArray());
                 da.Fill(dt);
                 da.SelectCommand.Parameters.Clear();
+                if (DBTrans == null)
+                {
+                    Connection.Close();
+                }
             }
             IList<T> result = new List<T>();
             foreach (DataRow row in dt.Rows)
