@@ -36,7 +36,7 @@
       <HintPath>..\packages\BenLai.SharedHelper.1.0.3\lib\net48\SharedHelper.dll</HintPath>
     </Reference>
     <Reference Include="SqlHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\BenLai.SqlUtility.2.1.1\lib\net48\SqlHelper.dll</HintPath>
+      <HintPath>..\packages\BenLai.SqlUtility.2.1.2\lib\net48\SqlHelper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
