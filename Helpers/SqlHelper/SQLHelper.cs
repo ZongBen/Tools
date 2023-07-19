@@ -11,21 +11,35 @@ using BenLai.SharedHelper;
 
 namespace BenLai.SqlUtility
 {
+    /// <summary>
+    /// 建立資料庫連線與交易。
+    /// </summary>
     public class SqlHelper : IDBOperator, IDBTransaction
     {
         private SqlConnection Connection { get; }
         private DBTransaction DBTrans { get; }
-        public SqlHelper(string ConnectionString, bool ExecuteTransaction)
+        /// <summary>
+        /// 初始化資料庫連線及交易。
+        /// </summary>
+        /// <param name="ConnectionString">資料庫連接字串</param>
+        /// <param name="EnabledTransaction">啟用資料庫交易，True: 啟用、False: 停用</param>
+        public SqlHelper(string ConnectionString, bool EnabledTransaction)
         {
             Connection = new SqlConnection(ConnectionString);
-            if (ExecuteTransaction)
+            if (EnabledTransaction)
             {
                 DBTrans = new DBTransaction() { 
                     Con = Connection
                 };
             }
         }
-
+        /// <summary>
+        /// 執行SQL指令，回傳強型別資料列。
+        /// </summary>
+        /// <typeparam name="T">資料類別</typeparam>
+        /// <param name="Command">SQL指令</param>
+        /// <param name="objParameters">SQL指令參數</param>
+        /// <returns>強型別資料列。</returns>
         public IList<T> ExecuteList<T>(string Command, SqlHelperParameters objParameters) where T : class, new()
         {     
             DataTable dt = new DataTable();
@@ -68,7 +82,12 @@ namespace BenLai.SqlUtility
             }
             return result;
         }
-
+        /// <summary>
+        /// 執行SQL指令，回傳受影響的資料列數目。
+        /// </summary>
+        /// <param name="Command">SQL指令</param>
+        /// <param name="objParameters">SQL指令參數</param>
+        /// <returns>受影響的資料列數目。</returns>
         public int ExecuteNonQuery(string Command, SqlHelperParameters objParameters)
         {
             using (SqlCommand cmd = new SqlCommand(Command, Connection))
@@ -102,7 +121,12 @@ namespace BenLai.SqlUtility
                 return result;
             }
         }
-
+        /// <summary>
+        /// 執行SQL指令，回傳第一列弱型別資料列。
+        /// </summary>
+        /// <param name="Command">SQL指令</param>
+        /// <param name="objParameters">SQL指令參數</param>
+        /// <returns>第一列弱型別資料列。</returns>
         public IList<object> ExecuteObjList(string Command, SqlHelperParameters objParameters)
         {
             using(DataTable dt = new DataTable())
@@ -216,11 +240,16 @@ namespace BenLai.SqlUtility
             string sqlQueyr = BuildDelSql(typeof(T).Name, SbDel.ToString());
             return ExecuteNonQuery(sqlQueyr, param);
         }
-
+        /// <summary>
+        /// 承認資料庫交易，並關閉連線。
+        /// </summary>
         public void Commit()
         {
             DBTrans.Commit();
         }
+        /// <summary>
+        /// 回復資料庫交易，並關閉連線。
+        /// </summary>
         public void Rollback()
         {
             DBTrans.Rollback();
@@ -268,7 +297,9 @@ namespace BenLai.SqlUtility
             return SbSql.ToString();
         }
     }
-
+    /// <summary>
+    /// 建立SQL指令參數合集
+    /// </summary>
     public class SqlHelperParameters
     {
         internal List<SqlParameter> SqlHelperParameter { get; }
@@ -276,6 +307,11 @@ namespace BenLai.SqlUtility
         {
             SqlHelperParameter = new List<SqlParameter>();
         }
+        /// <summary>
+        /// 新增SQL指令參數。
+        /// </summary>
+        /// <param name="express">參數名稱</param>
+        /// <param name="value">參數數值</param>
         public void Add(string express, object value)
         {
             SqlHelperParameter.Add(new SqlParameter()

@@ -40,6 +40,8 @@ namespace AutoCode
             this.SelectALL_Btn = new System.Windows.Forms.Button();
             this.CancelALL_Btn = new System.Windows.Forms.Button();
             this.SbSql_Btn = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.sql_type_cb = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // Sql_RichTB
@@ -157,11 +159,36 @@ namespace AutoCode
             this.SbSql_Btn.UseVisualStyleBackColor = true;
             this.SbSql_Btn.Click += new System.EventHandler(this.SbSql_Btn_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label4.Location = new System.Drawing.Point(328, 59);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(88, 16);
+            this.label4.TabIndex = 28;
+            this.label4.Text = "語法類別：";
+            // 
+            // sql_type_cb
+            // 
+            this.sql_type_cb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.sql_type_cb.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.sql_type_cb.FormattingEnabled = true;
+            this.sql_type_cb.Items.AddRange(new object[] {
+            "Insert",
+            "Update"});
+            this.sql_type_cb.Location = new System.Drawing.Point(413, 56);
+            this.sql_type_cb.Name = "sql_type_cb";
+            this.sql_type_cb.Size = new System.Drawing.Size(168, 24);
+            this.sql_type_cb.TabIndex = 29;
+            // 
             // AutoCodeSql
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(593, 547);
+            this.Controls.Add(this.sql_type_cb);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.SbSql_Btn);
             this.Controls.Add(this.CancelALL_Btn);
             this.Controls.Add(this.SelectALL_Btn);
@@ -194,5 +221,7 @@ namespace AutoCode
         private System.Windows.Forms.Button SelectALL_Btn;
         private System.Windows.Forms.Button CancelALL_Btn;
         private System.Windows.Forms.Button SbSql_Btn;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox sql_type_cb;
     }
 }

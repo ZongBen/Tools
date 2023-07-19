@@ -18,11 +18,13 @@ namespace AutoCode
         private List<string> TableNameList { get; }
         private string ConnectStr { get; }
         private readonly IClassService _Service;
+        private readonly ICommonService _commonService;
         public AutoCodeClass(List<string> TableNameList, string ConnectStr)
         {
             this.TableNameList = TableNameList;
             this.ConnectStr = ConnectStr;
             _Service = new ClassService();
+            _commonService = new CommonService();
             InitializeComponent();
         }
 
@@ -40,6 +42,7 @@ namespace AutoCode
                 {
                     _Service.AutoCode(item, Tb_FilePath.Text, ConnectStr);
                 }
+                _commonService.OpenFoder(Tb_FilePath.Text);
                 result = "輸出完成";
             }
             catch (Exception ex)

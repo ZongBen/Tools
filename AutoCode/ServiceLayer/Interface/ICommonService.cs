@@ -11,6 +11,7 @@ namespace ServiceLayer.Interface
 {
     public interface ICommonService
     {
+        void OpenFoder(string FolderPath);
         Point CenterLocation(Form ChildForm, Form ParentForm);
         string CodeClass(string ClassName, List<TableColumns> model);
     }

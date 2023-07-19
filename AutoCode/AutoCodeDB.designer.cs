@@ -213,7 +213,7 @@ namespace AutoCode
             this.Class_Btn.Name = "Class_Btn";
             this.Class_Btn.Size = new System.Drawing.Size(132, 50);
             this.Class_Btn.TabIndex = 22;
-            this.Class_Btn.Text = "產生類別";
+            this.Class_Btn.Text = "CodeClass";
             this.Class_Btn.UseVisualStyleBackColor = true;
             this.Class_Btn.Click += new System.EventHandler(this.Class_Btn_Click);
             // 
@@ -225,7 +225,7 @@ namespace AutoCode
             this.InsertSql_Btn.Name = "InsertSql_Btn";
             this.InsertSql_Btn.Size = new System.Drawing.Size(132, 50);
             this.InsertSql_Btn.TabIndex = 23;
-            this.InsertSql_Btn.Text = "產生InsertSql";
+            this.InsertSql_Btn.Text = "CodeSql";
             this.InsertSql_Btn.UseVisualStyleBackColor = true;
             this.InsertSql_Btn.Click += new System.EventHandler(this.InsertSql_Btn_Click);
             // 
@@ -237,7 +237,7 @@ namespace AutoCode
             this.Model_Btn.Name = "Model_Btn";
             this.Model_Btn.Size = new System.Drawing.Size(132, 50);
             this.Model_Btn.TabIndex = 24;
-            this.Model_Btn.Text = "產生Model";
+            this.Model_Btn.Text = "CodeModel";
             this.Model_Btn.UseVisualStyleBackColor = true;
             this.Model_Btn.Click += new System.EventHandler(this.Model_Btn_Click);
             // 

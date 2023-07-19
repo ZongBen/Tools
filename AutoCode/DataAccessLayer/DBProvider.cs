@@ -22,6 +22,14 @@ namespace DataAccessLayer
             SbSql.Append("   ,isc.character_maximum_length AS 'Max_Length'" + Environment.NewLine);
             SbSql.Append("   ,isc.IS_NULLABLE AS 'Is_Nullable'" + Environment.NewLine);
             SbSql.Append("   ,iccu.Is_PrimaryKey" + Environment.NewLine);
+            SbSql.Append("   ,(SELECT" + Environment.NewLine);
+            SbSql.Append("			value" + Environment.NewLine);
+            SbSql.Append("		FROM fn_listextendedproperty(NULL, 'schema', 'dbo', 'table'," + Environment.NewLine);
+            SbSql.Append("		isc.TABLE_NAME, 'column', DEFAULT)" + Environment.NewLine);
+            SbSql.Append("		WHERE name = 'MS_Description'" + Environment.NewLine);
+            SbSql.Append("		AND objtype = 'COLUMN'" + Environment.NewLine);
+            SbSql.Append("		AND objname COLLATE Chinese_Taiwan_Stroke_CI_AS = isc.COLUMN_NAME)" + Environment.NewLine);
+            SbSql.Append("	AS 'Column_Description'" + Environment.NewLine);
             SbSql.Append("FROM information_schema.columns isc" + Environment.NewLine);
             SbSql.Append("LEFT JOIN (SELECT" + Environment.NewLine);
             SbSql.Append("		TABLE_NAME" + Environment.NewLine);

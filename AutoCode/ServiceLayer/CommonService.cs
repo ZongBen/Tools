@@ -7,11 +7,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ParametersLayer;
+using System.Diagnostics;
 
 namespace ServiceLayer
 {
     public class CommonService : ICommonService
     {
+        public void OpenFoder(string FolderPath)
+        {
+            Process.Start(FolderPath);
+        }
         public Point CenterLocation(Form ChildForm, Form ParentForm)
         {
             int CenterX = ChildForm.Location.X + ChildForm.Width / 2;
@@ -24,7 +29,8 @@ namespace ServiceLayer
             StringBuilder sb = new StringBuilder();
             sb.Append("using System;" + Environment.NewLine);
             sb.Append("using System.Collections.Generic;" + Environment.NewLine);
-            //sb.Append("using System.ComponentModel.DataAnnotations;" + Environment.NewLine);
+            sb.Append("using System.ComponentModel.DataAnnotations;" + Environment.NewLine);
+            sb.Append("using System.ComponentModel;" + Environment.NewLine);
             sb.Append("" + Environment.NewLine);
             sb.Append("namespace TemplateModel" + Environment.NewLine);
             sb.Append("{" + Environment.NewLine);
@@ -42,6 +48,10 @@ namespace ServiceLayer
                     sb.Append($"[StringLength({Col.Max_Length})]" + Environment.NewLine);
                 }
                 */
+                sb.Append(@"        /// <summary>" + Environment.NewLine);
+                sb.Append(@"        /// " + Col.Column_Description + Environment.NewLine);
+                sb.Append(@"        /// </summary>" + Environment.NewLine);
+                sb.Append($"        [DisplayName(\"{Col.Column_Description}\")]" + Environment.NewLine);
                 sb.Append($"        public {ChangeType(Col.Data_Type)}");
                 if (Col.Is_Nullable == "YES" && ChangeType(Col.Data_Type) != "string")
                 {

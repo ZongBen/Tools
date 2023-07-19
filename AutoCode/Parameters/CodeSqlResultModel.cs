@@ -8,7 +8,7 @@ namespace ParametersLayer
 {
     public class CodeSqlResultModel
     {
-        public string InsertSql { get; set; }
+        public string SqlText { get; set; }
         public string Params { get; set; }
     }
 }

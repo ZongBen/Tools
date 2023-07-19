@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ServiceLayer;
 using ServiceLayer.Interface;
+using ParametersLayer;
 
 namespace AutoCode
 {
@@ -16,12 +17,12 @@ namespace AutoCode
     {
         private List<string> TableNameList { get; }
         private string ConnectStr { get; }
-        private readonly IInsertSqlService _Service;
+        private readonly ISqlService _Service;
         private readonly ISbSqlService _SbSqlService;
 
         public AutoCodeSql(List<string> TableNameList, string ConnectStr)
         {
-            _Service = new InsertSqlService();
+            _Service = new SqlService();
             _SbSqlService = new SbSqlService();
             this.TableNameList = TableNameList;
             this.ConnectStr = ConnectStr;
@@ -52,9 +53,18 @@ namespace AutoCode
             {
                 list.Add(Item);
             }
-            var result = _Service.AutoCode(TableList_DDL.SelectedItem.ToString(), list);
+
+            CodeSqlResultModel result = new CodeSqlResultModel();
+            if(sql_type_cb.Text == "Insert")
+            {
+                result = _Service.AutoCodeInsert(TableList_DDL.SelectedItem.ToString(), list);
+            }
+            else if(sql_type_cb.Text == "Update")
+            {
+                result = _Service.AutoCodeUpdate(TableList_DDL.SelectedItem.ToString(), list);
+            }
             Sql_RichTB.Clear();
-            Sql_RichTB.Text = result.InsertSql;
+            Sql_RichTB.Text = result.SqlText;
         }
 
         private void SelectALL_Btn_Click(object sender, EventArgs e)
@@ -80,8 +90,16 @@ namespace AutoCode
             {
                 list.Add(Item);
             }
-            var result = _Service.AutoCode(TableList_DDL.SelectedItem.ToString(), list);
-            string sbsql = _SbSqlService.Output(result.InsertSql.Replace('\r', ' ').Split('\n'));
+            CodeSqlResultModel result = new CodeSqlResultModel();
+            if (sql_type_cb.Text == "Insert")
+            {
+                result = _Service.AutoCodeInsert(TableList_DDL.SelectedItem.ToString(), list);
+            }
+            else if (sql_type_cb.Text == "Update")
+            {
+                result = _Service.AutoCodeUpdate(TableList_DDL.SelectedItem.ToString(), list);
+            }
+            string sbsql = _SbSqlService.Output(result.SqlText.Replace('\r', ' ').Split('\n'));
             Sql_RichTB.Clear();
             Sql_RichTB.Text = sbsql + result.Params;
         }

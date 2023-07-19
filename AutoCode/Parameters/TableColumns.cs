@@ -13,5 +13,6 @@ namespace ParametersLayer
         public int Max_Length { get; set; }
         public string Is_Nullable { get; set; }
         public string Is_PrimaryKey { get; set; }
+        public string Column_Description { get; set; }
     }
 }

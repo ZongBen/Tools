@@ -21,12 +21,14 @@ namespace AutoCode
         private List<TableColumns> ModelCol_List { get; set; } = new List<TableColumns>();
         private string ConnectStr { get; }
         private readonly IModelService _Service;
+        private readonly ICommonService _commonService;
 
         public AutoCodeModel(List<string> TableNameList, string ConnectStr)
         {
             this.TableNameList = TableNameList;
             this.ConnectStr = ConnectStr;
             _Service = new ModelService();
+            _commonService = new CommonService();
             InitializeComponent();
         }
 
@@ -79,6 +81,7 @@ namespace AutoCode
         private void CodeModel_Btn_Click(object sender, EventArgs e)
         {
             _Service.AutoCode(ModelCol_List, ModelName_Tb.Text, FilePath_Tb.Text);
+            _commonService.OpenFoder(FilePath_Tb.Text);
             MessageBox.Show("輸出完成");
         }
 

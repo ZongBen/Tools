@@ -10,10 +10,10 @@ using ParametersLayer;
 
 namespace ServiceLayer
 {
-    public class InsertSqlService : IInsertSqlService
+    public class SqlService : ISqlService
     {
         private readonly IDBProvider _Provider;
-        public InsertSqlService()
+        public SqlService()
         {
             _Provider = new DBProvider();
         }
@@ -24,7 +24,7 @@ namespace ServiceLayer
             return tableColumns.Select(x => x.Column_Name).ToList();
         }
 
-        public CodeSqlResultModel AutoCode(string TableName, List<string> ColList)
+        public CodeSqlResultModel AutoCodeInsert(string TableName, List<string> ColList)
         {
             StringBuilder SbSql = new StringBuilder();
             StringBuilder SbCol = new StringBuilder();
@@ -51,7 +51,27 @@ namespace ServiceLayer
             SbSql.Append(SbVal.ToString());
             SbSql.Append(")");
 
-            return new CodeSqlResultModel { InsertSql = SbSql.ToString(), Params = SbParam.ToString() };
+            return new CodeSqlResultModel { SqlText = SbSql.ToString(), Params = SbParam.ToString() };
+        }
+
+        public CodeSqlResultModel AutoCodeUpdate(string TableName, List<string> ColList)
+        {
+            StringBuilder SbSql = new StringBuilder();
+            StringBuilder SbCol = new StringBuilder();
+            StringBuilder SbParam = new StringBuilder();
+
+            SbSql.Append($"UPDATE {TableName}" + Environment.NewLine);
+            SbSql.Append("SET ");
+
+            foreach(var col in ColList)
+            {
+                SbCol.Append($",{col} = @{col}" + Environment.NewLine);
+                SbParam.Append($"parameters.Add(\"@{col}\", model.{col});" + Environment.NewLine);
+            }
+            SbCol = SbCol.Remove(0, 1);
+            SbSql.Append(SbCol.ToString());
+
+            return new CodeSqlResultModel { SqlText = SbSql.ToString(), Params = SbParam.ToString() };
         }
     }
 }

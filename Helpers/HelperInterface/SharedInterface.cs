@@ -8,7 +8,13 @@ namespace BenLai.SharedHelper.Interface
 {
     public interface IDBTransaction
     {
+        /// <summary>
+        /// 承認資料庫交易，並關閉連線。
+        /// </summary>
         void Commit();
+        /// <summary>
+        /// 回復資料庫交易，並關閉連線。
+        /// </summary>
         void Rollback();
     }
 
