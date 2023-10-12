@@ -1,21 +1,28 @@
 class BenValidator {
 
-    constructor() { }
+    constructor({ selector = '.ben-valid'
+        , pass = () => { throw 'did not set pass as a function' }
+        , fail = () => { throw 'did not set fail as a function' }
+    } = {}) {
+        this.selector = selector;
+        this.pass = pass;
+        this.fail = fail;
+    }
 
-    valid = (obj) => {
-        var pass = document.querySelectorAll(obj.selector).values().every((e) => {
+    valid = () => {
+        var pass = document.querySelectorAll(this.selector).values().every((e) => {
             if (e.getAttribute('data-ben-required') === 'true' && !this.#requiredValid(e)) {
-                obj.fail(e, 'required');
+                this.fail(e, 'required');
                 return false;
             }
             if (!this.#typeValid(e)) {
-                obj.fail(e, e.getAttribute('data-ben-typeValid'));
+                this.fail(e, e.getAttribute('data-ben-typeValid'));
                 return false;
             }
             return true;
         });
         if (pass) {
-            obj.pass();
+            this.pass();
         }
     };
 
@@ -30,7 +37,7 @@ class BenValidator {
             case 'checkbox':
                 var name = e.getAttribute('name');
                 var min_checked = e.getAttribute('data-ben-min-checked') ?? '1';
-                if(document.querySelectorAll(`input[name="${name}"]:checked`).length < min_checked){
+                if (document.querySelectorAll(`input[name="${name}"]:checked`).length < min_checked) {
                     return false;
                 }
                 break;
