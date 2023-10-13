@@ -6,19 +6,24 @@ class BenDataBinder {
 
     #InitDataBinding = (obj) => {
         Object.keys(obj).forEach(prop => {
+            this.#addCoummuter(prop);
             this.#Render(prop, obj[prop]);
         });
 
         var obj_proxy = new Proxy(obj, {
             set: (target, prop, value, receiver) => {
                 this.#Render(prop, value);
+                target[prop] = value;
             }
         });
         return obj_proxy;
     }
 
     #Render = (prop, value) => {
-        Array.from(document.querySelectorAll(`[data-ben-binder="${prop}"]`)).forEach(e => {
+        var query_binder = `[data-ben-binder="${prop}"]`;
+        var query_commuter = `[data-ben-commuter="${prop}"]`;
+
+        Array.from(document.querySelectorAll(`${query_binder}, ${query_commuter}`)).forEach(e => {
             if (e.tagName === 'INPUT') {
                 switch (e.getAttribute('type')) {
                     case 'radio':
@@ -28,8 +33,8 @@ class BenDataBinder {
                         }
                         break;
                     case 'checkbox':
-                        Array.from(document.querySelectorAll(`input[type="checkbox"][value="${value}"][data-ben-binder="${prop}"]`)).forEach(e => {
-                            e.checked = true;
+                        Array.from(document.querySelectorAll(`input[type="checkbox"]${query_binder}, input[type="checkbox"]${query_commuter}`)).forEach((cb) => {
+                            cb.checked = cb.getAttribute('value') == value ? true : false;
                         });
                         break;
                     default:
@@ -43,6 +48,14 @@ class BenDataBinder {
             else {
                 e.innerText = value;
             }
+        });
+    }
+
+    #addCoummuter = (prop) => {
+        Array.from(document.querySelectorAll(`[data-ben-commuter="${prop}"]`)).forEach(e => {
+            e.addEventListener('change', () => {
+                
+            });
         });
     }
 }
