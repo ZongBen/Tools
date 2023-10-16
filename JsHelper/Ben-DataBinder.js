@@ -6,7 +6,7 @@ class BenDataBinder {
 
     #InitDataBinding = (obj) => {
         Object.keys(obj).forEach(prop => {
-            this.#addCoummuter(prop);
+            this.#addCoummuter(obj, prop);
             this.#Render(prop, obj[prop]);
         });
 
@@ -51,10 +51,19 @@ class BenDataBinder {
         });
     }
 
-    #addCoummuter = (prop) => {
+    #addCoummuter = (obj, prop) => {
         Array.from(document.querySelectorAll(`[data-ben-commuter="${prop}"]`)).forEach(e => {
             e.addEventListener('change', () => {
-                
+                if (e.tagName !== 'INPUT' && e.tagName !== 'SELECT') {
+                    throw 'data-ben-commuter can not set beside INPUT & SELECT tag';
+                }
+                if (e.getAttribute('type') === 'radio') {
+                    obj[prop] = document.querySelector(`input[name="${e.getAttribute('name')}"]:checked`).value;
+                }
+                else {
+                    obj[prop] = e.value;
+                }
+                this.#Render(prop, e.value);
             });
         });
     }
