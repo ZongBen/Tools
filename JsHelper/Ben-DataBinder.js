@@ -22,13 +22,12 @@ class BenDataBinder {
         Object.keys(obj).forEach(prop => {
             this.#Render(objName, prop, obj[prop]);
         });
-        var obj_proxy = new Proxy(obj, {
+        return new Proxy(obj, {
             set: (target, prop, value) => {
                 target[prop] = value;
                 this.#Render(objName, prop, value);
             }
         });
-        return obj_proxy;
     }
 
     #Render = (objName, prop, value) => {
