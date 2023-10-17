@@ -4,16 +4,21 @@ class BenDataBinder {
         this.obj = this.#InitDataBinding(objName, obj);
     }
 
+    Destroy = () => {
+        Object.keys(this.obj).forEach(prop => {
+            Reflect.set(this.obj, prop, '');
+        });
+    }
+
     #InitDataBinding = (objName, obj) => {
         Object.keys(obj).forEach(prop => {
-            this.#addCoummuter(objName, obj, prop);
+            this.#addCoummuter(objName, prop);
             this.#Render(objName, prop, obj[prop]);
         });
-
         var obj_proxy = new Proxy(obj, {
             set: (target, prop, value, receiver) => {
-                this.#Render(prop, value);
                 target[prop] = value;
+                this.#Render(objName, prop, value);
             }
         });
         return obj_proxy;
@@ -33,13 +38,9 @@ class BenDataBinder {
                             c_tar.checked = false;
                         }
                         break;
-                    /*
                     case 'checkbox':
-                        Array.from(document.querySelectorAll(`input[type="checkbox"][name="${e.getAttribute('name')}"]`)).forEach((cb) => {
-                            cb.checked = cb.getAttribute('value') == value ? true : false;
-                        });
+                        e.checked = e.value == value ? true : false;
                         break;
-                    */
                     default:
                         e.value = value;
                         break;
@@ -54,14 +55,18 @@ class BenDataBinder {
         });
     }
 
-    #addCoummuter = (objName, obj, prop) => {
+    #addCoummuter = (objName, prop) => {
         Array.from(document.querySelectorAll(`[data-ben-commuter="${objName}.${prop}"]`)).forEach(e => {
-            if (e.tagName !== 'INPUT' && e.tagName !== 'SELECT' || e.getAttribute('type') == 'checkbox') {
-                throw 'data-ben-commuter can only set on input(beside checkbox) or select';
+            if (e.tagName !== 'INPUT' && e.tagName !== 'SELECT') {
+                throw 'data-ben-commuter can only be set on input and select tag';
             }
             e.addEventListener('change', () => {
-                obj[prop] = e.value;
-                this.#Render(prop, e.value);
+                if (e.getAttribute('type') == 'checkbox') {
+                    Reflect.set(this.obj, prop, e.checked ? e.value : '');
+                }
+                else {
+                    Reflect.set(this.obj, prop, e.value);
+                }
             });
         });
     }
