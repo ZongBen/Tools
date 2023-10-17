@@ -6,7 +6,7 @@ class BenDataBinder {
         this.obj = this.#InitDataBinding(objName, obj);
     }
 
-    Destroy = () => {
+    Empty = () => {
         Object.keys(this.obj).forEach(prop => {
             Reflect.set(this.obj, prop, '');
         });
