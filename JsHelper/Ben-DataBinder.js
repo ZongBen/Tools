@@ -32,7 +32,10 @@ class BenDataBinder {
 
     #Render = (objName, prop, value) => {
         Array.from(document.querySelectorAll(`[data-ben-binder="${objName}.${prop}"], [data-ben-commuter="${objName}.${prop}"]`)).forEach(e => {
-            if(e.getAttribute('data-ben-commuter') && e.getAttribute('data-ben-commuter-listener') != objName){
+            if (e.getAttribute('data-ben-commuter') && e.getAttribute('data-ben-commuter-listener') != objName) {
+                if (e.tagName !== 'INPUT' && e.tagName !== 'SELECT') {
+                    throw 'data-ben-commuter can only set on INPUT and SELECT';
+                }
                 e.addEventListener('change', () => {
                     if (e.getAttribute('type') == 'checkbox') {
                         Reflect.set(this.obj, prop, e.checked ? e.value : '');
