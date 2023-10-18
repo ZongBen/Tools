@@ -3,34 +3,34 @@ class BenDataBinder {
         if (!objName) {
             throw 'objName can not be empty';
         }
-        this.obj = this.#InitDataBinding(objName, obj);
+        this.obj = this.#initDataBinding(objName, obj);
     }
 
-    Empty = () => {
+    empty = () => {
         Object.keys(this.obj).forEach(prop => {
             Reflect.set(this.obj, prop, '');
         });
     }
 
-    Map = (srcObj) => {
+    map = (srcObj) => {
         Object.keys(srcObj).forEach(prop => {
             Reflect.set(this.obj, prop, srcObj[prop]);
         });
     }
 
-    #InitDataBinding = (objName, obj) => {
+    #initDataBinding = (objName, obj) => {
         Object.keys(obj).forEach(prop => {
-            this.#Render(objName, prop, obj[prop]);
+            this.#render(objName, prop, obj[prop]);
         });
         return new Proxy(obj, {
             set: (target, prop, value) => {
                 target[prop] = value;
-                this.#Render(objName, prop, value);
+                this.#render(objName, prop, value);
             }
         });
     }
 
-    #Render = (objName, prop, value) => {
+    #render = (objName, prop, value) => {
         Array.from(document.querySelectorAll(`[data-ben-binder="${objName}.${prop}"], [data-ben-commuter="${objName}.${prop}"]`)).forEach(e => {
             if (e.getAttribute('data-ben-commuter') && e.getAttribute('data-ben-commuter-listener') != objName) {
                 if (e.tagName !== 'INPUT' && e.tagName !== 'SELECT') {
